@@ -1,6 +1,5 @@
 from django.db import models
 from base import BaseModel
-from scraper.models import Author
 
 
 class Tag(BaseModel):
