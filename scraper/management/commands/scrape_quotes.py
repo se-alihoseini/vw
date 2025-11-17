@@ -4,7 +4,7 @@ from typing import Iterable, List
 from django.core.management import BaseCommand, CommandError
 from bs4 import BeautifulSoup
 
-from scraper.classes import Normalizer, Hashing
+from scraper.classes import Normalizer, Hashing, Store
 
 
 
@@ -54,8 +54,10 @@ class Command(BaseCommand):
     def build_chain(self):
         normalize = Normalizer()
         hash_step = Hashing()
+        store_step = Store()
 
         normalize.set_next(hash_step)
+        hash_step.set_next(store_step)
         return normalize
 
 
