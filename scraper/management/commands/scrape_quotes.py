@@ -1,4 +1,3 @@
-import asyncio
 import requests
 from scraper.schema import PageContext
 from typing import Iterable, List
@@ -47,7 +46,7 @@ class Command(BaseCommand):
                 raise CommandError()
 
             objects = self.parse_objects(html)
-            # self.process_objects(objects, handler)
+            self.process_objects(objects, handler)
             page += 1
 
 
@@ -81,7 +80,7 @@ class Command(BaseCommand):
     def process_objects(self, objects: Iterable[dict], handler):
         for index, obj in enumerate(objects, start=1):
             try:
-                result = asyncio.run(handler.handle(obj))
+                result = handler.handle(obj)
             except Exception :
                 continue
 
